@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+.DealBtn{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 2rem;
+    flex-wrap: wrap;
+    font-family: "Nunito", system-ui;
+    font-optical-sizing: auto;
+    font-style: oblique;
+}
+.DealBtnInner{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.DealBtn a{
+    background-color: green;
+    height: 3rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    padding-inline: 2rem;
+    font-size: clamp(1.2rem , 2.8vw , 2rem);
+    text-transform: capitalize;
+    color: white;
+    cursor: pointer;
+}
+.bgRed a{
+    background-color: red;
+    display: flex;
+}
+.Text{
+    font-weight: 500;
+    line-height: 2.3rem;
+    text-transform: capitalize;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-family: "Nunito", sans-serif;
+}
+.Text span{
+    font-size: 1.5rem ;
+    font-weight: 700;
+}
+.Condition{
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+    color: green;
+}
+@media (width < 400px) {
+    .DealBtn{
+        padding-inline: 1rem;
+    }
+    .DealBtn a{
+        height: 2.5rem;
+        border-radius: 2rem;
+        padding-inline: 2rem;
+        padding-top: 0.3rem;
+        font-size: 1.5rem;
+    }
+}
+
+
+
+  
+
+  
+  .arrow1 {
+    color: white;
+    font-size: 3.5rem;
+    font-weight: 700;
+  }
+  
+  .arrow1 {
+    animation: slide1 1s ease-in-out infinite;
+    margin-left: 9px;
+  }
+  
+  
+  @keyframes slide1 {
+    0%,
+    100% {
+      transform: translate(0, 0);
+    }
+  
+    50% {
+      transform: translate(10px, 0);
+    }
+  }
+  
+  
+  .timer{
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: red;
+    padding-block: 0rem 3rem;
+  }
