@@ -94,6 +94,11 @@ function Navbar() {
             </li>
             <li>
               <LuLayoutPanelLeft className="font" />
+              <a href="/seller-dashboard">Seller Dashboard</a>
+
+            </li>
+            <li>
+              <LuLayoutPanelLeft className="font" />
               <a href="/DealDone">Deal Done</a>
             </li>
           </ul>
@@ -105,6 +110,7 @@ function Navbar() {
                 UserDetails
               </a>
               <a href="/BuySell">Buy & Sell</a>
+              <a href="/seller-dashboard">Seller Dashboard</a>
               <button className="logout" type="button" onClick={handleLogout}>
                 Logout
               </button>

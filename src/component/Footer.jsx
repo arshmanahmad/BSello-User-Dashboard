@@ -80,17 +80,20 @@ function Footer() {
                 <a href="/Terms">term and conditions</a>
               </li>
               <li>
-                <a href="/PrivacyPolicy">privacy policy</a>
+                <a href="/privacy-policy">privacy policy</a>
               </li>
 
               <li>
                 <a href="/Disclaimer">disclaimer</a>
               </li>
               <li>
-                <a href="/cookiesPolicy">cookies policy</a>
+                <a href="/cookies-policy">cookies policy</a>
               </li>
               <li>
                 <a href="/GenerateCode">Code Generate</a>
+              </li>
+              <li>
+                <a href="/seller-dashboard">Seller Dashboard</a>
               </li>
             </ul>
           </div>

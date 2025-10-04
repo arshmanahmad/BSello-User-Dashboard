@@ -6,6 +6,7 @@ import Frequently from "../component/Frequently";
 import Listen from "../component/Listen";
 import Happy from "../component/happy";
 import Reviews from "../component/reviews";
+import SellerAccessCard from "../components/SellerAccessCard";
 import bgMobile from '../images/bgMobile.png';
 import g1 from '../images/g1.png';
 import g2 from '../images/g2.png';
@@ -146,6 +147,10 @@ function Home() {
             <abbr title="Just Click If You Want Any Service">Contact Us</abbr>
           </button>
         </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4">
+        <SellerAccessCard />
       </div>
 
       <Happy />

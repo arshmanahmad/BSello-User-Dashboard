@@ -22,13 +22,15 @@ import "./index.css";
 import CodeMatching from "./component/CodeMatching";
 import PaymentMethodSeller from "./component/PaymentMethodSeller";
 import Scammers from "./pages/Scammers";
-import CookiesPolicy from "./component/footerData/cookiesPolicy";
+// import CookiesPolicy from "./components/CookiesPolicy";
 import Disclaimer from "./component/footerData/Disclaimer";
-import PrivacyPolicy from "./component/footerData/PrivacyPolicy";
+// import PrivacyPolicy from "./components/PrivacyPolicy";
 import Terms from "./component/footerData/Terms";
 import Refund from "./component/footerData/Refund";
 import HelpCenter from "./component/footerData/HelpCenter";
 import Prove from "./pages/Prove";
+import TailwindTest from "./components/TailwindTest";
+import SellerDashboard from "./pages/SellerDashboard";
 
 function App() {
   return (
@@ -68,9 +70,11 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/scammers" element={<Scammers />} />
         <Route path="/prove" element={<Prove />} />
-        <Route path="/cookiesPolicy" element={<CookiesPolicy />} />
+        <Route path="/tailwind-test" element={<TailwindTest />} />
+        <Route path="/seller-dashboard" element={<SellerDashboard />} />
+        {/* <Route path="/cookies-policy" element={<CookiesPolicy />} /> */}
         <Route path="/Disclaimer" element={<Disclaimer />} />
-        <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+        {/* <Route path="/privacy-policy" element={<PrivacyPolicy />} /> */}
         <Route path="/Terms" element={<Terms />} />
         <Route path="/HelpCenter" element={<HelpCenter />} />
         <Route path="/Refund" element={<Refund />} />
