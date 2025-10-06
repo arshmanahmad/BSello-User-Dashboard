@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./component/Navbar";
 import Footer from "./component/Footer";
@@ -32,10 +32,13 @@ import Prove from "./pages/Prove";
 import TailwindTest from "./components/TailwindTest";
 import SellerDashboard from "./pages/SellerDashboard";
 
-function App() {
+function AppContent() {
+  const location = useLocation();
+  const hideChrome = location.pathname.startsWith("/seller-dashboard");
+
   return (
-    <Router>
-      <Navbar />
+    <>
+      {!hideChrome && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/BuySell" element={<BuySell />} />
@@ -80,7 +83,15 @@ function App() {
         <Route path="/Refund" element={<Refund />} />
         <Route path="*" element={<Custom404 />} />
       </Routes>
-      <Footer />
+      {!hideChrome && <Footer />}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }

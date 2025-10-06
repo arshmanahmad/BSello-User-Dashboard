@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { accountApi, dealApi } from '../../services/sellerPanelApi';
+import { FiBarChart2, FiCheckCircle, FiClock, FiDollarSign, FiLayers, FiLock, FiRefreshCcw, FiShield, FiTrendingUp, FiUsers } from 'react-icons/fi';
 
 const DashboardStats = () => {
   const [stats, setStats] = useState({
@@ -88,64 +89,55 @@ const DashboardStats = () => {
     {
       title: 'Total Accounts',
       value: stats.totalAccounts,
-      icon: '📊',
-      color: 'bg-blue-500',
+      icon: <FiUsers />,
       textColor: 'text-blue-600'
     },
     {
       title: 'Active Accounts',
       value: stats.activeAccounts,
-      icon: '✅',
-      color: 'bg-green-500',
+      icon: <FiCheckCircle />,
       textColor: 'text-green-600'
     },
     {
       title: 'Locked Accounts',
       value: stats.lockedAccounts,
-      icon: '🔒',
-      color: 'bg-yellow-500',
+      icon: <FiLock />,
       textColor: 'text-yellow-600'
     },
     {
       title: 'Sold Accounts',
       value: stats.soldAccounts,
-      icon: '💰',
-      color: 'bg-purple-500',
+      icon: <FiDollarSign />,
       textColor: 'text-purple-600'
     },
     {
       title: 'Total Deals',
       value: stats.totalDeals,
-      icon: '🤝',
-      color: 'bg-indigo-500',
+      icon: <FiLayers />,
       textColor: 'text-indigo-600'
     },
     {
       title: 'Pending Deals',
       value: stats.pendingDeals,
-      icon: '⏳',
-      color: 'bg-orange-500',
+      icon: <FiClock />,
       textColor: 'text-orange-600'
     },
     {
       title: 'Completed Deals',
       value: stats.completedDeals,
-      icon: '🎉',
-      color: 'bg-green-500',
+      icon: <FiShield />,
       textColor: 'text-green-600'
     },
     {
       title: 'Total Revenue',
       value: formatCurrency(stats.totalRevenue),
-      icon: '💵',
-      color: 'bg-green-500',
+      icon: <FiDollarSign />,
       textColor: 'text-green-600'
     },
     {
       title: 'Monthly Revenue',
       value: formatCurrency(stats.monthlyRevenue),
-      icon: '📈',
-      color: 'bg-green-500',
+      icon: <FiTrendingUp />,
       textColor: 'text-green-600'
     }
   ];
@@ -167,11 +159,8 @@ const DashboardStats = () => {
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Dashboard Statistics</h2>
             <p className="text-xl text-gray-600">Overview of your selling performance</p>
           </div>
-          <button
-            onClick={fetchStats}
-            className="btn-secondary text-lg py-4 px-8"
-          >
-            🔄 Refresh
+          <button onClick={fetchStats} className="btn-secondary text-lg py-4 px-8 inline-flex items-center gap-2">
+            <FiRefreshCcw /> Refresh
           </button>
         </div>
       </div>
@@ -181,8 +170,8 @@ const DashboardStats = () => {
         {statCards.map((card, index) => (
           <div key={index} className="bg-white rounded-2xl shadow-xl border border-gray-200 p-10 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
             <div className="flex items-center">
-              <div className={`flex-shrink-0 w-20 h-20 ${card.color} rounded-2xl flex items-center justify-center shadow-lg`}>
-                <span className="text-4xl">{card.icon}</span>
+              <div className="flex-shrink-0">
+                <span className="text-4xl text-gray-700">{card.icon}</span>
               </div>
               <div className="ml-8 flex-1">
                 <p className="text-lg font-bold text-gray-500 mb-3">{card.title}</p>
@@ -201,8 +190,8 @@ const DashboardStats = () => {
         <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-10">
           <h3 className="text-3xl font-bold text-gray-900 mb-8">Revenue Overview</h3>
           <div className="h-96 bg-gray-50 rounded-2xl flex items-center justify-center">
-            <div className="text-center">
-              <div className="text-gray-400 text-8xl mb-6">📊</div>
+            <div className="text-center text-gray-400">
+              <FiBarChart2 className="mx-auto text-8xl mb-6" />
               <p className="text-xl text-gray-500 mb-3">Revenue chart would go here</p>
               <p className="text-lg text-gray-400">Integration with chart library needed</p>
             </div>

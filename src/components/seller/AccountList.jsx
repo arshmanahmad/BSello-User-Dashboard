@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { accountApi, biddingApi, lockingApi } from '../../services/sellerPanelApi';
+import { FiBarChart2 } from 'react-icons/fi';
 import AccountCard from './AccountCard';
 import BiddingModal from './BiddingModal';
 import LockModal from './LockModal';
@@ -148,7 +149,9 @@ const AccountList = () => {
       {/* Accounts Grid */}
       {accounts.length === 0 ? (
         <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-16 text-center">
-          <div className="text-gray-400 text-8xl mb-6">📊</div>
+          <div className="text-gray-400 text-8xl mb-6 flex items-center justify-center">
+            <FiBarChart2 />
+          </div>
           <h3 className="text-2xl font-bold text-gray-900 mb-4">No accounts found</h3>
           <p className="text-xl text-gray-500">You haven't listed any accounts yet.</p>
         </div>

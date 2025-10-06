@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { dealApi } from '../../services/sellerPanelApi';
 import CredentialModal from './CredentialModal';
+import { FiAlertTriangle, FiCheckCircle, FiClock, FiCreditCard, FiDollarSign, FiEye, FiFileText, FiInfo, FiKey, FiLayers } from 'react-icons/fi';
 
 const DealManagement = () => {
   const [deals, setDeals] = useState([]);
@@ -83,19 +84,19 @@ const DealManagement = () => {
   const getStatusIcon = (status) => {
     switch (status) {
       case 'pending':
-        return '⏳';
+        return <FiClock />;
       case 'payment_completed':
-        return '💳';
+        return <FiCreditCard />;
       case 'credentials_shared':
-        return '🔑';
+        return <FiKey />;
       case 'completed':
-        return '✅';
+        return <FiCheckCircle />;
       case 'cancelled':
-        return '❌';
+        return <FiAlertTriangle />;
       case 'disputed':
-        return '⚠️';
+        return <FiAlertTriangle />;
       default:
-        return '❓';
+        return <FiInfo />;
     }
   };
 
@@ -161,7 +162,9 @@ const DealManagement = () => {
       {/* Deals List */}
       {deals.length === 0 ? (
         <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-16 text-center">
-          <div className="text-gray-400 text-8xl mb-6">🤝</div>
+          <div className="text-gray-400 text-8xl mb-6 flex items-center justify-center">
+            <FiLayers />
+          </div>
           <h3 className="text-2xl font-bold text-gray-900 mb-4">No deals found</h3>
           <p className="text-xl text-gray-500">You don't have any deals yet.</p>
         </div>
@@ -176,14 +179,15 @@ const DealManagement = () => {
                       {deal.accountName}
                     </h3>
                     <span className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-bold ${getStatusColor(deal.status)}`}>
-                      <span className="mr-2 text-lg">{getStatusIcon(deal.status)}</span>
+                    <span className="mr-2 text-lg flex items-center">{getStatusIcon(deal.status)}</span>
                       {deal.status.replace('_', ' ').charAt(0).toUpperCase() + deal.status.replace('_', ' ').slice(1)}
                     </span>
                   </div>
                   <p className="text-lg text-gray-600 mb-4">
                     {deal.accountType} • Deal ID: {deal.dealId}
                   </p>
-                  <div className="text-4xl font-bold text-green-600">
+          <div className="text-4xl font-bold text-green-600 inline-flex items-center gap-2">
+            <FiDollarSign className="text-gray-700" />
                     {new Intl.NumberFormat('en-US', {
                       style: 'currency',
                       currency: 'USD'
@@ -234,26 +238,20 @@ const DealManagement = () => {
                 {deal.status === 'payment_completed' && !deal.accountCredentials && (
                   <button
                     onClick={() => handleShareCredentials(deal)}
-                    className="btn-primary text-sm py-2 px-4"
+                    className="btn-primary"
                   >
-                    🔑 Share Credentials
+                    <span className="inline-flex items-center gap-2"><FiKey /> Share Credentials</span>
                   </button>
                 )}
                 
                 {deal.status === 'credentials_shared' && (
-                  <button
-                    onClick={() => handleShareCredentials(deal)}
-                    className="btn-secondary text-sm py-2 px-4"
-                  >
-                    👁️ View Credentials
+                  <button onClick={() => handleShareCredentials(deal)} className="btn-secondary">
+                    <span className="inline-flex items-center gap-2"><FiEye /> View Credentials</span>
                   </button>
                 )}
 
-                <button
-                  onClick={() => window.open(`/deals/${deal.dealId}`, '_blank')}
-                  className="btn-secondary text-sm py-2 px-4"
-                >
-                  📄 View Details
+                <button onClick={() => window.open(`/deals/${deal.dealId}`, '_blank')} className="btn-ghost">
+                  <span className="inline-flex items-center gap-2"><FiFileText /> View Details</span>
                 </button>
               </div>
             </div>

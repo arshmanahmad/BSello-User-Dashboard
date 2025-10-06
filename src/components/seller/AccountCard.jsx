@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { lockingApi } from '../../services/sellerPanelApi';
+import { FiCheckCircle, FiLock, FiDollarSign, FiTrash2, FiHelpCircle, FiUnlock, FiTarget, FiSettings } from 'react-icons/fi';
 
 const AccountCard = ({ account, onRemove, onBiddingToggle, onLock }) => {
   const [loading, setLoading] = useState(false);
@@ -22,15 +23,15 @@ const AccountCard = ({ account, onRemove, onBiddingToggle, onLock }) => {
   const getStatusIcon = (status) => {
     switch (status) {
       case 'active':
-        return '✅';
+        return <FiCheckCircle className="text-green-700" />;
       case 'locked':
-        return '🔒';
+        return <FiLock className="text-yellow-700" />;
       case 'sold':
-        return '💰';
+        return <FiDollarSign className="text-blue-700" />;
       case 'removed':
-        return '🗑️';
+        return <FiTrash2 className="text-red-700" />;
       default:
-        return '❓';
+        return <FiHelpCircle className="text-gray-700" />;
     }
   };
 
@@ -85,7 +86,7 @@ const AccountCard = ({ account, onRemove, onBiddingToggle, onLock }) => {
           />
           <div className="absolute top-4 right-4">
             <span className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold ${getStatusColor(account.status)}`}>
-              <span className="mr-2 text-lg">{getStatusIcon(account.status)}</span>
+              <span className="mr-2 text-lg flex items-center">{getStatusIcon(account.status)}</span>
               {account.status.charAt(0).toUpperCase() + account.status.slice(1)}
             </span>
           </div>
@@ -164,22 +165,28 @@ const AccountCard = ({ account, onRemove, onBiddingToggle, onLock }) => {
               disabled={loading}
               className="flex-1 btn-secondary text-base py-3 disabled:opacity-50"
             >
-              {loading ? 'Unlocking...' : '🔓 Unlock'}
+              {loading ? 'Unlocking...' : (
+                <span className="inline-flex items-center gap-2"><FiUnlock /> Unlock</span>
+              )}
             </button>
           ) : (
             <>
               <button
                 onClick={() => onBiddingToggle(account)}
-                className={`flex-1 text-base py-3 ${
+                className={`flex-1 ${
                   account.biddingEnabled ? 'btn-secondary' : 'btn-primary'
                 }`}
               >
-                {account.biddingEnabled ? '⚙️ Manage Bidding' : '🎯 Enable Bidding'}
+                {account.biddingEnabled ? (
+                  <span className="inline-flex items-center gap-2"><FiSettings /> Manage Bidding</span>
+                ) : (
+                  <span className="inline-flex items-center gap-2"><FiTarget /> Enable Bidding</span>
+                )}
               </button>
               <button
                 onClick={() => onLock(account)}
                 disabled={account.status === 'sold' || account.status === 'removed'}
-                className="flex-1 btn-secondary text-base py-3 disabled:opacity-50"
+                className="flex-1 btn-secondary disabled:opacity-50"
               >
                 🔒 Lock Account
               </button>
@@ -189,9 +196,9 @@ const AccountCard = ({ account, onRemove, onBiddingToggle, onLock }) => {
           <button
             onClick={() => onRemove(account.accountId)}
             disabled={account.status === 'locked' || account.status === 'sold'}
-            className="flex-1 bg-red-500 hover:bg-red-600 text-white text-base py-3 px-4 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+            className="flex-1 btn-danger"
           >
-            🗑️ Remove
+            <span className="inline-flex items-center gap-2"><FiTrash2 /> Remove</span>
           </button>
         </div>
 
