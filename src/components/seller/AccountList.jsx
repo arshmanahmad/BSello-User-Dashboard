@@ -98,7 +98,7 @@ const AccountList = () => {
   return (
     <div className="space-y-10 w-full">
       {/* Header and Filters */}
-      <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-10">
+      <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-10">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-10">
           <div>
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Account Management</h2>
@@ -148,7 +148,7 @@ const AccountList = () => {
 
       {/* Accounts Grid */}
       {accounts.length === 0 ? (
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-16 text-center">
+        <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-16 text-center">
           <div className="text-gray-400 text-8xl mb-6 flex items-center justify-center">
             <FiBarChart2 />
           </div>
@@ -171,7 +171,7 @@ const AccountList = () => {
 
       {/* Pagination */}
       {pagination.totalPages > 1 && (
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
+        <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 p-8">
           <div className="flex items-center justify-between">
             <div className="text-lg font-semibold text-gray-700">
               Showing {((pagination.currentPage - 1) * filters.limit) + 1} to{' '}

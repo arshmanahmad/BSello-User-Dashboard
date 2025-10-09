@@ -72,7 +72,7 @@ const AccountCard = ({ account, onRemove, onBiddingToggle, onLock }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+    <div className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-[1.02]">
       {/* Account Image */}
       {account.accountImages && account.accountImages.length > 0 && (
         <div className="h-64 bg-gray-200 relative">

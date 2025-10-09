@@ -31,10 +31,14 @@ import HelpCenter from "./component/footerData/HelpCenter";
 import Prove from "./pages/Prove";
 import TailwindTest from "./components/TailwindTest";
 import SellerDashboard from "./pages/SellerDashboard";
+import BuyerDashboard from "./pages/BuyerDashboard";
+import DealCreation from "./pages/DealCreation";
+import DealCompletion from "./pages/DealCompletion";
+import NotificationCenter from "./pages/NotificationCenter";
 
 function AppContent() {
   const location = useLocation();
-  const hideChrome = location.pathname.startsWith("/seller-dashboard");
+  const hideChrome = location.pathname.startsWith("/seller-dashboard") || location.pathname.startsWith("/buyer-dashboard");
 
   return (
     <>
@@ -75,6 +79,10 @@ function AppContent() {
         <Route path="/prove" element={<Prove />} />
         <Route path="/tailwind-test" element={<TailwindTest />} />
         <Route path="/seller-dashboard" element={<SellerDashboard />} />
+        <Route path="/buyer-dashboard" element={<BuyerDashboard />} />
+        <Route path="/deal-creation" element={<DealCreation />} />
+        <Route path="/deal-completion" element={<DealCompletion />} />
+        <Route path="/notifications" element={<NotificationCenter />} />
         {/* <Route path="/cookies-policy" element={<CookiesPolicy />} /> */}
         <Route path="/Disclaimer" element={<Disclaimer />} />
         {/* <Route path="/privacy-policy" element={<PrivacyPolicy />} /> */}

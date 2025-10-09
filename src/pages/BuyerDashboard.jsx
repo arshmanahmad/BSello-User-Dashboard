@@ -1,28 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AccountList from '../components/seller/AccountList';
-import DealManagement from '../components/seller/DealManagement';
-import DashboardStats from '../components/seller/DashboardStats';
-import SellerSidebar, { navItems } from '../components/seller/SellerSidebar';
 import { FiMenu, FiX, FiBell } from 'react-icons/fi';
+import BuyerSidebar, { buyerNavItems } from '../components/buyer/BuyerSidebar';
+import BuyerPayment from './BuyerPayment';
+import TransactionHistory from '../components/buyer/TransactionHistory';
+import ProfileManagement from '../components/buyer/ProfileManagement';
+import FundManagement from '../components/buyer/FundManagement';
 
-const SellerDashboard = () => {
-  const [activeTab, setActiveTab] = useState('accounts');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+const BuyerDashboard = () => {
+  const [activeTab, setActiveTab] = useState('payment');
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-
-  const tabs = [
-    { id: 'accounts', name: 'Account Management', icon: '📊' },
-    { id: 'deals', name: 'Deal Management', icon: '🤝' },
-    { id: 'stats', name: 'Dashboard Stats', icon: '📈' },
-  ];
 
   const handleTabChange = (tabId) => {
     setActiveTab(tabId);
-    setError(null);
     setMobileOpen(false);
   };
 
@@ -37,14 +29,16 @@ const SellerDashboard = () => {
 
   const renderActiveTab = () => {
     switch (activeTab) {
-      case 'accounts':
-        return <AccountList />;
-      case 'deals':
-        return <DealManagement />;
-      case 'stats':
-        return <DashboardStats />;
+      case 'payment':
+        return <BuyerPayment />;
+      case 'transactions':
+        return <TransactionHistory />;
+      case 'profile':
+        return <ProfileManagement />;
+      case 'funds':
+        return <FundManagement />;
       default:
-        return <AccountList />;
+        return <BuyerPayment />;
     }
   };
 
@@ -60,10 +54,10 @@ const SellerDashboard = () => {
         }`}
       >
         <div className="px-6 py-5 border-b border-gray-200 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center font-bold">S</div>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold">B</div>
             <div>
-              <p className="text-sm text-gray-500">Seller</p>
+              <p className="text-sm text-gray-500">Buyer</p>
               <p className="font-semibold text-gray-900">Dashboard</p>
             </div>
           </div>
@@ -72,13 +66,13 @@ const SellerDashboard = () => {
           </button>
         </div>
         <nav className="p-3 space-y-2">
-          {navItems.map(item => (
+          {buyerNavItems.map(item => (
             <button
               key={item.id}
               onClick={() => handleTabChange(item.id)}
               className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left transition-all duration-200 ${
                 activeTab === item.id
-                  ? 'bg-green-50 text-green-700 border border-green-200 shadow-sm'
+                  ? 'bg-blue-50 text-blue-700 border border-blue-200 shadow-sm'
                   : 'text-gray-700 hover:bg-gray-50'
               }`}
             >
@@ -94,7 +88,7 @@ const SellerDashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="lg:flex lg:min-h-screen">
-        <SellerSidebar 
+        <BuyerSidebar 
           active={activeTab} 
           onChange={handleTabChange} 
           onLogout={handleLogout}
@@ -104,19 +98,19 @@ const SellerDashboard = () => {
 
         <main className="flex-1">
           {/* Header */}
-          <div className="bg-gradient-to-r from-white to-gray-50 shadow-xl border-b border-gray-200">
+          <div className="bg-gradient-to-r from-white to-blue-50 shadow-xl border-b border-gray-200">
             <div className="w-full px-6 lg:px-12">
               <div className="flex justify-between items-center py-8 lg:py-12">
                 <div className="flex-1">
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg">
-                      <span className="text-white font-bold text-2xl">S</span>
+                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                      <span className="text-white font-bold text-2xl">B</span>
                     </div>
                     <div>
-                      <h1 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                        Seller Dashboard
+                      <h1 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 to-blue-700 bg-clip-text text-transparent">
+                        Buyer Dashboard
                       </h1>
-                      <p className="text-lg lg:text-xl text-gray-600 mt-2">Manage your accounts, deals, and sales performance</p>
+                      <p className="text-lg lg:text-xl text-gray-600 mt-2">Manage your purchases, funds, and account</p>
                     </div>
                   </div>
                 </div>
@@ -127,7 +121,7 @@ const SellerDashboard = () => {
                   >
                     <FiBell className="text-xl" />
                     <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                      3
+                      2
                     </span>
                   </button>
                   <button onClick={() => setMobileOpen(true)} className="lg:hidden inline-flex items-center justify-center w-12 h-12 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 shadow-sm">
@@ -135,11 +129,11 @@ const SellerDashboard = () => {
                   </button>
                   <div className="text-right hidden sm:block">
                     <p className="text-sm text-gray-500 mb-1">Welcome back,</p>
-                    <p className="text-xl font-semibold text-gray-900">Seller Name</p>
-                    <p className="text-sm text-green-600 font-medium">Online</p>
+                    <p className="text-xl font-semibold text-gray-900">Buyer Name</p>
+                    <p className="text-sm text-blue-600 font-medium">Online</p>
                   </div>
-                  <div className="w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-xl ring-4 ring-green-100">
-                    <span className="text-white font-bold text-2xl lg:text-3xl">S</span>
+                  <div className="w-16 h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-xl ring-4 ring-blue-100">
+                    <span className="text-white font-bold text-2xl lg:text-3xl">B</span>
                   </div>
                 </div>
               </div>
@@ -150,17 +144,17 @@ const SellerDashboard = () => {
           <div className="lg:hidden bg-white border-b border-gray-200">
             <div className="px-4 py-4 overflow-x-auto">
               <div className="flex gap-3">
-                {tabs.map((tab) => (
+                {buyerNavItems.map((tab) => (
                   <button
                     key={tab.id}
                     onClick={() => handleTabChange(tab.id)}
                     className={`px-6 py-3 rounded-xl text-base font-semibold whitespace-nowrap transition-all duration-200 text-left ${
                       activeTab === tab.id 
-                        ? 'bg-gradient-to-r from-green-600 to-green-700 text-white shadow-lg' 
+                        ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg' 
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
-                    {tab.name}
+                    {tab.label}
                   </button>
                 ))}
               </div>
@@ -171,31 +165,7 @@ const SellerDashboard = () => {
 
           {/* Main Content */}
           <div className="w-full px-6 lg:px-12 py-8 lg:py-16">
-            {error && (
-              <div className="mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div className="ml-3">
-                    <h3 className="text-sm font-medium text-red-800">Error</h3>
-                    <div className="mt-2 text-sm text-red-700">
-                      <p>{error}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {loading ? (
-              <div className="flex justify-center items-center py-12">
-                <div className="loader"></div>
-              </div>
-            ) : (
-              renderActiveTab()
-            )}
+            {renderActiveTab()}
           </div>
         </main>
       </div>
@@ -203,4 +173,4 @@ const SellerDashboard = () => {
   );
 };
 
-export default SellerDashboard;
+export default BuyerDashboard;

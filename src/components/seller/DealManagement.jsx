@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { dealApi } from '../../services/sellerPanelApi';
 import CredentialModal from './CredentialModal';
-import { FiAlertTriangle, FiCheckCircle, FiClock, FiCreditCard, FiDollarSign, FiEye, FiFileText, FiInfo, FiKey, FiLayers } from 'react-icons/fi';
+import { FiAlertTriangle, FiCheckCircle, FiClock, FiCreditCard, FiDollarSign, FiEye, FiFileText, FiInfo, FiKey, FiLayers, FiPlus } from 'react-icons/fi';
 
 const DealManagement = () => {
+  const navigate = useNavigate();
   const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -50,6 +52,19 @@ const DealManagement = () => {
 
   const handlePageChange = (page) => {
     setFilters({ ...filters, page });
+  };
+
+  const handleCreateNewDeal = () => {
+    // Navigate to deal creation page
+    // In a real app, you might want to pass account data here
+    navigate('/deal-creation', {
+      state: {
+        // You can pass account data here if needed
+        // account: selectedAccount,
+        // buyer: selectedBuyer,
+        // seller: currentSeller
+      }
+    });
   };
 
   const statusOptions = [
@@ -117,7 +132,14 @@ const DealManagement = () => {
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Deal Management</h2>
             <p className="text-xl text-gray-600">Manage your sales and share account credentials</p>
           </div>
-          <div className="mt-6 lg:mt-0">
+          <div className="mt-6 lg:mt-0 flex flex-col sm:flex-row gap-4">
+            <button
+              onClick={handleCreateNewDeal}
+              className="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-xl font-semibold hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center gap-2"
+            >
+              <FiPlus className="text-xl" />
+              Create New Deal
+            </button>
             <span className="text-xl font-bold text-gray-700 bg-gray-100 px-6 py-3 rounded-xl">
               Total: {pagination.totalDeals || 0} deals
             </span>
@@ -250,8 +272,28 @@ const DealManagement = () => {
                   </button>
                 )}
 
+                <button 
+                  onClick={() => navigate('/deal-completion', {
+                    state: {
+                      dealId: deal.dealId,
+                      account: {
+                        platform: deal.accountType,
+                        username: deal.accountName,
+                        price: `$${deal.finalPrice}`
+                      },
+                      buyer: {
+                        name: deal.buyerId.fullName,
+                        email: deal.buyerId.email
+                      }
+                    }
+                  })} 
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl"
+                >
+                  <span className="inline-flex items-center gap-2"><FiFileText /> View Deal</span>
+                </button>
+                
                 <button onClick={() => window.open(`/deals/${deal.dealId}`, '_blank')} className="btn-ghost">
-                  <span className="inline-flex items-center gap-2"><FiFileText /> View Details</span>
+                  <span className="inline-flex items-center gap-2"><FiEye /> View Details</span>
                 </button>
               </div>
             </div>

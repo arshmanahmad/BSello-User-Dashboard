@@ -90,7 +90,7 @@ function Navbar() {
             </li> */}
             <li>
               <RiMoneyPoundCircleLine className="font" />
-              <a href="/payment">Buyer Payment</a>
+              <a href="/buyer-dashboard">Buyer Dashboard</a>
             </li>
             <li>
               <LuLayoutPanelLeft className="font" />
@@ -111,6 +111,8 @@ function Navbar() {
               </a>
               <a href="/BuySell">Buy & Sell</a>
               <a href="/seller-dashboard">Seller Dashboard</a>
+              <a href="/buyer-dashboard">Buyer Dashboard</a>
+              <a href="/notifications">Notifications</a>
               <button className="logout" type="button" onClick={handleLogout}>
                 Logout
               </button>

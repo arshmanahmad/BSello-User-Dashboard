@@ -1,24 +1,25 @@
 import React from 'react';
-import { FiHome, FiUsers, FiBarChart2, FiSettings, FiLogOut, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiHome, FiCreditCard, FiClock, FiUser, FiDollarSign, FiSettings, FiLogOut, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-export const navItems = [
-  { id: 'accounts', label: 'Accounts', icon: <FiUsers /> },
-  { id: 'deals', label: 'Deals', icon: <FiHome /> },
-  { id: 'stats', label: 'Analytics', icon: <FiBarChart2 /> },
+export const buyerNavItems = [
+  { id: 'payment', label: 'Payment', icon: <FiCreditCard /> },
+  { id: 'transactions', label: 'Transaction History', icon: <FiClock /> },
+  { id: 'profile', label: 'Profile Management', icon: <FiUser /> },
+  { id: 'funds', label: 'Fund Management', icon: <FiDollarSign /> },
 ];
 
-const SellerSidebar = ({ active, onChange, onLogout, isCollapsed, onToggle }) => {
+const BuyerSidebar = ({ active, onChange, onLogout, isCollapsed, onToggle }) => {
   return (
     <aside className={`hidden lg:flex lg:flex-col ${isCollapsed ? 'lg:w-20' : 'lg:w-80'} bg-gray-900 border-r border-gray-700 sticky top-0 h-screen overflow-y-auto transition-all duration-300`}>
       <div className="px-4 py-6 border-b border-gray-700 bg-gray-800">
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-lg font-semibold shadow-lg">
-              <span className="text-white">S</span>
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-lg font-semibold shadow-lg">
+              <span className="text-white">B</span>
             </div>
             {!isCollapsed && (
               <div className="leading-tight">
-                <p className="text-[11px] uppercase tracking-widest text-gray-400">Seller</p>
+                <p className="text-[11px] uppercase tracking-widest text-gray-400">Buyer</p>
                 <p className="text-xl font-bold text-white">Dashboard</p>
               </div>
             )}
@@ -33,7 +34,7 @@ const SellerSidebar = ({ active, onChange, onLogout, isCollapsed, onToggle }) =>
       </div>
 
       <nav className="flex-1 px-4 py-6 space-y-3">
-        {navItems.map(item => {
+        {buyerNavItems.map(item => {
           const isActive = active === item.id;
           return (
             <button
@@ -42,7 +43,7 @@ const SellerSidebar = ({ active, onChange, onLogout, isCollapsed, onToggle }) =>
               aria-current={isActive ? 'page' : undefined}
               className={`relative w-full flex items-center ${isCollapsed ? 'justify-center px-3' : 'gap-4 px-4 justify-start'} py-4 rounded-xl text-left transition-all duration-200 ${
                 isActive
-                  ? 'bg-green-600 text-white shadow-lg'
+                  ? 'bg-blue-600 text-white shadow-lg'
                   : 'text-gray-300 hover:bg-gray-800 hover:text-white'
               }`}
               title={isCollapsed ? item.label : undefined}
@@ -73,6 +74,4 @@ const SellerSidebar = ({ active, onChange, onLogout, isCollapsed, onToggle }) =>
   );
 };
 
-export default SellerSidebar;
-
-
+export default BuyerSidebar;
