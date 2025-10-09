@@ -35,7 +35,6 @@ function Navbar() {
     setIsLoggedIn(false);
     navigate("/login");
   };
-
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
     document.body.style.overflow = isNavOpen ? "auto" : "hidden";
